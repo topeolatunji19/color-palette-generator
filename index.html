@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The engine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="heading">
+            <div class="jumbotron text-center">
+                <h1>Tunji's Color Palette Creator</h1>
+            </div>
+        </div>
+    </header>
+    {% import "bootstrap/wtf.html" as wtf %}
+
+    <h2 class="add-image-title">Upload an image you want to extract colors from</h2>
+    <div class="upload-form">
+        {{ wtf.quick_form(form, novalidate=True) }}
+    </div>
+
+    {% if colors: %}
+    <div class="colors">
+        <h3>These are the 10 most used colors in the image uploaded</h3>
+        <table class="table table-striped center">
+          <thead>
+            <tr>
+              <th scope="col">Color</th>
+              <th scope="col">Code</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for color in colors %}
+            <tr>
+              <td style="background-color:{{ color }}"></td>
+              <td>{{ color }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    </div>
+    {% endif %}
